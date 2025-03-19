@@ -1,0 +1,170 @@
+/* Import beautiful Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@300;600&display=swap");
+
+/* Soft Light Pink Gradient Background */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Centering the main container */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Glassmorphic Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  margin-top: 5rem;
+  border-radius: 15px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 480px;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.glass-card:hover {
+  transform: scale(1.05);
+}
+
+/* Stylish Heading with Start & End Decoration */
+.heading {
+  font-size: 28px;
+  font-weight: 600;
+  color: #b71c1c;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.heading::before,
+.heading::after {
+  content: "⭐";
+  font-size: 20px;
+  color: #f06292;
+  position: absolute;
+}
+
+.heading::before {
+  left: -25px;
+}
+
+.heading::after {
+  right: -25px;
+}
+
+/* Input Field Styling */
+.input-box {
+  background-color: white;
+  color: black;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #f06292;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.input-box:focus {
+  border-color: #e91e63;
+  box-shadow: 0px 0px 10px rgba(233, 30, 99, 0.5);
+}
+
+/* Button Styling */
+.crazy-button {
+  padding: 12px 20px;
+  background: #e91e63;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.crazy-button:hover {
+  background-color: #c2185b;
+  transform: scale(1.05);
+}
+
+/* Shortened URL Box */
+.short-url {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  text-align: center;
+  color: #880e4f;
+  font-size: 18px;
+  font-weight: bold;
+  backdrop-filter: blur(8px);
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease-in-out;
+}
+
+.short-url:hover {
+  transform: scale(1.05);
+}
+
+/* Properly Center the QR Code */
+.short-url img {
+    display: block;
+    margin: 10px auto;
+    width: 120px;  /* Pehle jitna tha utna hi rakha */
+    height: auto;
+  }
+  
+
+  /* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.8); /* Light background for clarity */
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  th, td {
+    border: 2px solid #e91e63; /* Maintain theme */
+    padding: 12px;
+    text-align: center;
+    font-size: 16px;
+    color: black; /* Changed from white to black */
+    font-weight: bold;
+  }
+  
+  th {
+    background: #e91e63; /* Header background */
+    color: white; /* Keep header text white */
+  }
+  
+  tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.6); /* Alternating row color */
+  }
+  
+  tr:hover {
+    background: rgba(255, 182, 193, 0.7); /* Light pink hover effect */
+  }
+  
+  /*
+  .analytics-container {
+    overflow-x: auto;
+  }
+    */
+  
