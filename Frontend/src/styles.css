@@ -31,7 +31,7 @@ body {
   padding: 40px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  width: 480px;
+  width: 800px;
   transition: transform 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
@@ -162,9 +162,19 @@ table {
     background: rgba(255, 182, 193, 0.7); /* Light pink hover effect */
   }
   
-
+  .analytics-table {
+    width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
+  }
+  
+  .analytics-table th, .analytics-table td {
+    white-space: normal;
+    word-break: break-word;
+    text-align: left;
+  }
+  
   .analytics-container {
     overflow-x: auto;
   }
-    
   
