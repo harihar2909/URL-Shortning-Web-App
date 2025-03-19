@@ -75,7 +75,7 @@ app.get("/:shortUrl" , async(req , res) => {
     });
 
     */
-    app.get("/:shortUrl", async (req, res) => {
+    app.get("https://url-shortning-web-app.onrender.com/:shortUrl", async (req, res) => {
         try {
             const { shortUrl } = req.params;
             const url = await Url.findOne({ shortUrl });
