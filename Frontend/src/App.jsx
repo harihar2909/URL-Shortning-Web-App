@@ -8,7 +8,7 @@ export default function App() {
   const [analytics, setAnalytics] = useState([]); // Store analytics data
 
   const handleSubmit = () => {
-    axios.post('http://localhost:3000/api/short', { originalUrl })
+    axios.post('https://url-shortning-web-app.onrender.com/api/short', { originalUrl })
     .then((res) => {
         setShortUrl(res.data);
         console.log("API Response", res.data);
@@ -32,7 +32,7 @@ export default function App() {
   };
 */
 const fetchAnalytics = () => {
-  axios.get('http://localhost:3000/api/analytics')
+  axios.get('https://url-shortning-web-app.onrender.com/api/analytics')
   .then((res) => {
       setAnalytics(res.data);
       console.log("Analytics Data", res.data);
@@ -50,7 +50,7 @@ const trackClick = (shortUrl) => {
           const { latitude, longitude } = position.coords;
           console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
           
-          axios.get(`http://localhost:3000/${shortUrl}?lat=${latitude}&lon=${longitude}`)
+          axios.get(`https://url-shortning-web-app.onrender.com/${shortUrl}?lat=${latitude}&lon=${longitude}`)
           .then(() => console.log("Click tracked with location"))
           .catch(err => console.log(err));
       }, (error) => {
@@ -117,7 +117,7 @@ const trackClick = (shortUrl) => {
         {analytics.map((url, index) => (
             <tr key={index}>
                 <td>
-                <a href={`http://localhost:3000/${url.shortUrl}`}
+                <a href={`https://url-shortning-web-app.onrender.com/${url.shortUrl}`}
    target="_blank" 
    rel="noopener noreferrer" 
    onClick={() => trackClick(url.shortUrl)}>
