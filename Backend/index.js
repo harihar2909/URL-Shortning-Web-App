@@ -44,7 +44,7 @@ app.post('/api/short' , async(req , res) => {
             shortUrl
         
         });
-        const myUrl = `https://url-shortning-web-app.onrender.com/${shortUrl}`;
+        const myUrl = `http://localhost:3000/${shortUrl}`;
         const qrCodeImg = await QRCode.toDataURL(myUrl);
         await url.save();
         return res.status(200).json( { message:"URL Generated" , shortUrl:myUrl , qrCodeImg});
@@ -75,7 +75,7 @@ app.get("/:shortUrl" , async(req , res) => {
     });
 
     */
-    app.get("https://url-shortning-web-app.onrender.com/:shortUrl", async (req, res) => {
+    app.get("/:shortUrl", async (req, res) => {
         try {
             const { shortUrl } = req.params;
             const url = await Url.findOne({ shortUrl });
