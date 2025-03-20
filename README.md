@@ -27,35 +27,39 @@ Frontend : Developed a simple visually appealing UI with React JS.
 -When the user clicks on 'Shorten Now' button , a Post request is sent to /api/short in the Backend. 
 
 Following are some Code Snippets showing above 2 steps :-
-{
-// Code Blocks showing the Same 
+           
+           {
+         // Code Blocks showing the Same 
 Front End : 
 
 TextBox and Submit Button :- 
-  <input
+            
+            
+            <input
           value={originalUrl}
           onChange={(e) => setOriginalUrl(e.target.value)}
           type="text"
           placeholder="Enter your URL here..."
           className="input-box"
         />
-    <button onClick={handleSubmit} className="crazy-button">
+        <button onClick={handleSubmit} className="crazy-button">
           🚀 Shorten Now
-    </button>
+         </button>
 
 handleSubmit function that sends a post request to the Backend :-
-const handleSubmit = () => {
-    axios.post('https://url-shortning-web-app.onrender.com/api/short', { originalUrl })
-    .then((res) => {
+
+        const handleSubmit = () => {
+         axios.post('https://url-shortning-web-app.onrender.com/api/short', { originalUrl })
+         .then((res) => {
         setShortUrl(res.data);
         console.log("API Response", res.data);
-    })
-    .catch((err) => {
+         })
+        .catch((err) => {
         console.log(err);
-    });
-  };
+        });
+     };
 
-}
+     }
 
 -Then the Backend generated a ShortID using the Nanoid Package. 
 -The short URL and the Original URL are stored in MongoDB
@@ -63,8 +67,8 @@ const handleSubmit = () => {
 
 { Code Snippet for above 3 Steps : 
 
-app.post('/api/short' , async(req , res) => {
-    try{
+      app.post('/api/short' , async(req , res) => {
+      try{
         const {originalUrl} = req.body;
             if(!originalUrl){
                 return res.status(400).json({message:"URL is required"});
@@ -84,16 +88,21 @@ app.post('/api/short' , async(req , res) => {
         console.log(err);
         res.status(500).json({message:"Server Error"});
     }   
-});
+    });
 }
 
 -The ShortURL got from the Backend is displayed on the Front End by the following code Block : 
+
+
 {
-    {shortUrl && (
-  <div className="short-url">
-    <p>Shortened URL:</p>
-    
-    <a href={ `https://url-shortning-web-app.onrender.com/{shortUrl?.shortUrl}`} 
+             
+              {shortUrl && (
+             
+              <div className="short-url">
+           
+             <p>Shortened URL:</p>
+  
+     <a href={ `https://url-shortning-web-app.onrender.com/{shortUrl?.shortUrl}`} 
        target="_blank" 
        rel="noopener noreferrer"
        onClick={() => trackClick(shortUrl?.shortUrl)}>
@@ -110,19 +119,19 @@ app.post('/api/short' , async(req , res) => {
 
   -When the user clicks on the Short URL , the frontend calls the backend /shortUrl endpoint.
 
-{  // Code Snippet for this 
-  <a href={ `https://url-shortning-web-app.onrender.com/{shortUrl?.shortUrl}`} 
-       target="_blank" 
-       rel="noopener noreferrer"
-       onClick={() => trackClick(shortUrl?.shortUrl)}>
-      {shortUrl?.shortUrl}
-    </a>
-  } 
+           {  // Code Snippet for this 
+          <a href={ `https://url-shortning-web-app.onrender.com/{shortUrl?.shortUrl}`} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            onClick={() => trackClick(shortUrl?.shortUrl)}>
+            {shortUrl?.shortUrl}
+          </a>
+           } 
 On clicking this Link , also the trackCLick function is executed which calls the backend /shortUrl?lat=${latitude}&lon=${longitude} endpoint for fetching the Location and tracking the Click Count. 
 
-{  // trackClick Function : 
-const trackClick = (shortUrl) => {
-  if (navigator.geolocation) {
+          {  // trackClick Function : 
+         const trackClick = (shortUrl) => {
+         if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
           const { latitude, longitude } = position.coords;
           console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
@@ -148,39 +157,39 @@ const trackClick = (shortUrl) => {
 
 { Backend Code Snippet : 
 
-app.get("/:shortUrl", async (req, res) => {
+    app.get("/:shortUrl", async (req, res) => {
         try {
             const { shortUrl } = req.params;
             const url = await Url.findOne({ shortUrl });
     
-  if (url) {
+     if (url) {
         url.clicks++;
     
      // Get user location from request headers (Frontend will send it)
-  const { lat, lon } = req.query;
+     const { lat, lon } = req.query;
     
-  if(lat && lon) {
-const weatherApiKey = process.env.WEATHER_API_KEY; // Store API key in .env
-const locationUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weatherApiKey}`;
+    if(lat && lon) {
+     const weatherApiKey = process.env.WEATHER_API_KEY; // Store API key in .env
+     const locationUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weatherApiKey}`;
     
-const locationResponse = await fetch(locationUrl);
-const locationData = await locationResponse.json();
+     const locationResponse = await fetch(locationUrl);
+     const locationData = await locationResponse.json();
     
-if (locationData && locationData.name) {
+      if (locationData && locationData.name) {
                         url.locations.push({ city: locationData.name, country: locationData.sys.country });
-  }
-}
+       }
+      }
     
-  await url.save();
-  return res.redirect(url.originalUrl);
-  } else {
+       await url.save();
+       return res.redirect(url.originalUrl);
+      } else {
                 return res.status(404).json({ message: "URL not found" });
-  }
-  } catch (err) {
+      }
+        } catch (err) {
             console.log(err);
             res.status(500).json({ message: "Server Error" });
-  }
-});
+      }
+    });
 
 } 
 
@@ -190,23 +199,23 @@ So by this ,  when each time short URL is accessed ,   geolocation data ( City &
 
 - Step 3 ) When the user clicks the 'Show CLick Analytics' Button , a get Request is sent to the Backend at /api/analytics Route.
 
-  { // Code Snippet
+      { // Code Snippet
 
- <button onClick={fetchAnalytics} className="analytics-button">
+      <button onClick={fetchAnalytics} className="analytics-button">
           📊 Show Click Analytics
-  </button>
+       </button>
 
   Following is the fetchAnalytics Function : 
   
-  const fetchAnalytics = () => {
-  axios.get('https://url-shortning-web-app.onrender.com/api/analytics')
-  .then((res) => {
+       const fetchAnalytics = () => {
+       axios.get('https://url-shortning-web-app.onrender.com/api/analytics')
+      .then((res) => {
       setAnalytics(res.data);
       console.log("Analytics Data", res.data);
-  })
-  .catch((err) => {
+       })
+      .catch((err) => {
       console.log(err);
-  });
+       });
 };
 
 }
@@ -215,7 +224,7 @@ So by this ,  when each time short URL is accessed ,   geolocation data ( City &
 
 { Code Snippet for /api/analytics route of Backend 
 
-  app.get("/api/analytics", async (req, res) => {
+        app.get("/api/analytics", async (req, res) => {
         try {
             const urls = await Url.find({});
             return res.status(200).json(urls);
@@ -228,7 +237,7 @@ So by this ,  when each time short URL is accessed ,   geolocation data ( City &
 // Front End Code for displaying the Data in form of a Table  : 
 
 
-  {analytics.length > 0 && (
+       {analytics.length > 0 && (
           <div className="analytics-container">
            <table className="analytics-table">
     <thead>
@@ -244,11 +253,11 @@ So by this ,  when each time short URL is accessed ,   geolocation data ( City &
             <tr key={index}>
                 <td>
                 <a href={`https://url-shortning-web-app.onrender.com/${url.shortUrl}`}
-   target="_blank" 
-   rel="noopener noreferrer" 
-   onClick={() => trackClick(url.shortUrl)}>
-   {url.shortUrl}
-</a>
+       target="_blank" 
+        rel="noopener noreferrer" 
+         onClick={() => trackClick(url.shortUrl)}>
+      {url.shortUrl}
+        </a>
                 </td>
                 <td>{url.originalUrl}</td>
                 <td>{url.clicks}</td>
@@ -264,7 +273,7 @@ So by this ,  when each time short URL is accessed ,   geolocation data ( City &
             </tr>
         ))}
     </tbody>
-</table>
+    </table>
 
 
 }
