@@ -65,7 +65,7 @@ handleSubmit function that sends a post request to the Backend :-
 -The short URL and the Original URL are stored in MongoDB
 -A QR Code is generated using the QR Code Package  
 
-{ Code Snippet for above 3 Steps : 
+Code Snippet for above 3 Steps : 
 
       app.post('/api/short' , async(req , res) => {
       try{
@@ -89,14 +89,13 @@ handleSubmit function that sends a post request to the Backend :-
         res.status(500).json({message:"Server Error"});
     }   
     });
-}
+    }
 
 -The ShortURL got from the Backend is displayed on the Front End by the following code Block : 
 
 
-{
-             
-              {shortUrl && (
+     {
+          {shortUrl && (
              
               <div className="short-url">
            
@@ -109,10 +108,9 @@ handleSubmit function that sends a post request to the Backend :-
        {shortUrl?.shortUrl}
     </a>
     {shortUrl.qrCodeImg && <img src={shortUrl.qrCodeImg} alt="Generated QR Code" />}
-  </div>
-)}
-
-}
+     </div>
+    )}
+    }
 
 
 - Step 2 : Redirecting to Original URL :
@@ -142,12 +140,12 @@ On clicking this Link , also the trackCLick function is executed which calls the
       }, (error) => {
           console.log("Geolocation error:", error);
       });
-  } else {
+     } else {
       console.log("Geolocation not supported");
-  }
-};
-
-}
+     }
+    };
+    }
+    
 
 
 
@@ -155,7 +153,7 @@ On clicking this Link , also the trackCLick function is executed which calls the
 - The backend increments the click count and tracks the location using geolocation api of Open Weather Site.
 - Then the user is redirected to the original URL.
 
-{ Backend Code Snippet : 
+Backend Code Snippet : 
 
     app.get("/:shortUrl", async (req, res) => {
         try {
@@ -191,7 +189,7 @@ On clicking this Link , also the trackCLick function is executed which calls the
       }
     });
 
-} 
+    
 
 
 So by this ,  when each time short URL is accessed ,   geolocation data ( City & Country ) is retreived using the OpenWeather API and the Data is Stored in MongoDB Database.
@@ -216,13 +214,13 @@ So by this ,  when each time short URL is accessed ,   geolocation data ( City &
       .catch((err) => {
        console.log(err);
        });
-};
+      };
 
-}
+      }
   
 - The frontend fetches the Data about Location and click Count using the /api/analytics endpoint and Displays it in the Form of a Table.
 
-{ Code Snippet for /api/analytics route of Backend 
+Code Snippet for /api/analytics route of Backend 
 
         app.get("/api/analytics", async (req, res) => {
         try {
@@ -234,7 +232,7 @@ So by this ,  when each time short URL is accessed ,   geolocation data ( City &
         }
     });
 
-// Front End Code for displaying the Data in form of a Table  : 
+ Front End Code for displaying the Data in form of a Table  : 
 
 
        {analytics.length > 0 && (
@@ -276,7 +274,7 @@ So by this ,  when each time short URL is accessed ,   geolocation data ( City &
     </table>
 
 
-}
+
 
 
 
