@@ -84,7 +84,7 @@ const trackClick = (shortUrl) => {
   <div className="short-url">
     <p>Shortened URL:</p>
     
-    <a href={ `https://url-shortning-web-app.onrender.com/${shortUrl?.shortUrl}`} 
+    <a href={ `https://url-shortning-web-app.onrender.com/${shortUrl}`} 
        target="_blank" 
        rel="noopener noreferrer"
        onClick={() => trackClick(shortUrl?.shortUrl)}>
