@@ -30,9 +30,9 @@ Following are some Code Snippets showing above 2 steps :-
            
            {
          // Code Blocks showing the Same 
-Front End : 
+         Front End : 
 
-TextBox and Submit Button :- 
+         TextBox and Submit Button :- 
             
             
             <input
@@ -42,24 +42,24 @@ TextBox and Submit Button :-
           placeholder="Enter your URL here..."
           className="input-box"
         />
-        <button onClick={handleSubmit} className="crazy-button">
+         <button onClick={handleSubmit} className="crazy-button">
           🚀 Shorten Now
          </button>
 
 handleSubmit function that sends a post request to the Backend :-
 
-        const handleSubmit = () => {
+         const handleSubmit = () => {
          axios.post('https://url-shortning-web-app.onrender.com/api/short', { originalUrl })
          .then((res) => {
-        setShortUrl(res.data);
-        console.log("API Response", res.data);
+         setShortUrl(res.data);
+         console.log("API Response", res.data);
          })
-        .catch((err) => {
-        console.log(err);
-        });
-     };
+         .catch((err) => {
+         console.log(err);
+         });
+         };
 
-     }
+      }
 
 -Then the Backend generated a ShortID using the Nanoid Package. 
 -The short URL and the Original URL are stored in MongoDB
@@ -74,7 +74,7 @@ handleSubmit function that sends a post request to the Backend :-
                 return res.status(400).json({message:"URL is required"});
             }
             const shortUrl = nanoid(6);
-        const url = new Url({
+            const url = new Url({
             originalUrl,
             shortUrl
         
@@ -106,7 +106,7 @@ handleSubmit function that sends a post request to the Backend :-
        target="_blank" 
        rel="noopener noreferrer"
        onClick={() => trackClick(shortUrl?.shortUrl)}>
-      {shortUrl?.shortUrl}
+       {shortUrl?.shortUrl}
     </a>
     {shortUrl.qrCodeImg && <img src={shortUrl.qrCodeImg} alt="Generated QR Code" />}
   </div>
@@ -132,9 +132,9 @@ On clicking this Link , also the trackCLick function is executed which calls the
           {  // trackClick Function : 
          const trackClick = (shortUrl) => {
          if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-          const { latitude, longitude } = position.coords;
-          console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+         navigator.geolocation.getCurrentPosition((position) => {
+         const { latitude, longitude } = position.coords;
+         console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
           
           axios.get(`https://url-shortning-web-app.onrender.com/${shortUrl}?lat=${latitude}&lon=${longitude}`)
           .then(() => console.log("Click tracked with location"))
@@ -209,12 +209,12 @@ So by this ,  when each time short URL is accessed ,   geolocation data ( City &
   
        const fetchAnalytics = () => {
        axios.get('https://url-shortning-web-app.onrender.com/api/analytics')
-      .then((res) => {
-      setAnalytics(res.data);
-      console.log("Analytics Data", res.data);
+       .then((res) => {
+       setAnalytics(res.data);
+       console.log("Analytics Data", res.data);
        })
       .catch((err) => {
-      console.log(err);
+       console.log(err);
        });
 };
 
